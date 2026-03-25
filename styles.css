@@ -1,0 +1,287 @@
+/* ─── Fonts ─────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Sohne';
+  src: url('font/sohne-web-buch.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sohne';
+  src: url('font/sohne-web-buch-kursiv.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Sohne';
+  src: url('font/sohne-web-kraftig.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sohne';
+  src: url('font/sohne-web-kraftig-kursiv.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Sohne';
+  src: url('font/sohne-web-halbfett.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* ─── Design Tokens ──────────────────────────────────────────────────────── */
+:root {
+  --bg:             hsl(0, 0%, 98%);
+  --text-primary:   hsl(0, 0%, 5%);
+  --text-secondary: hsl(0, 0%, 23%);
+  --text-tertiary:  hsl(224, 6%, 48%);
+  --hover-bg:       hsl(0, 0%, 94%);
+  --font:           'Sohne', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --radius-img:     12px;
+  --container-max:  960px;
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────── */
+html {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+/* ─── Container ──────────────────────────────────────────────────────────── */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 64px 48px 0;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+.site-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 40px;
+}
+
+.avatar-wrap {
+  margin-bottom: 8px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.role {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-tertiary);
+  margin-top: 4px;
+}
+
+.header-nav a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+}
+
+.header-nav a:hover {
+  text-decoration: underline;
+}
+
+.nav-dot {
+  color: var(--text-tertiary);
+  user-select: none;
+}
+
+/* ─── Two-Column Layout ──────────────────────────────────────────────────── */
+.two-col {
+  display: grid;
+  grid-template-columns: 45fr 55fr;
+  gap: 0 5%;
+  align-items: start;
+}
+
+.col-left {
+  min-width: 0;
+}
+
+.col-right {
+  position: sticky;
+  top: 64px;
+  align-self: start;
+}
+
+/* ─── Section Labels ─────────────────────────────────────────────────────── */
+.section-label {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+/* ─── Project List ───────────────────────────────────────────────────────── */
+.project-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-row {
+  padding: 8px 10px;
+  margin: 0 -10px 2px;
+  border-radius: 6px;
+  cursor: default;
+  transition: background 0.15s ease;
+}
+
+.project-row.row-active {
+  background: var(--hover-bg);
+}
+
+.project-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.project-meta {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.project-brief {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* ─── Preview Pane ───────────────────────────────────────────────────────── */
+.preview-pane {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-img);
+  overflow: hidden;
+  background: var(--hover-bg);
+}
+
+.preview-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-img);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.preview-img.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── About Section ──────────────────────────────────────────────────────── */
+.about-section {
+  margin-top: 48px;
+}
+
+.about-text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 380px;
+}
+
+/* ─── Connect Section ────────────────────────────────────────────────────── */
+.connect-section {
+  margin-top: 48px;
+}
+
+.social-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.social-link {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.social-link:hover {
+  text-decoration: underline;
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────────────── */
+.site-footer {
+  margin-top: 80px;
+  padding-bottom: 48px;
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+/* ─── Mobile ─────────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .container {
+    padding: 40px 24px 0;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .col-right {
+    display: none;
+  }
+}
