@@ -111,7 +111,7 @@ body {
   gap: 6px;
   font-size: 13px;
   color: var(--text-tertiary);
-  margin-top: 4px;
+  margin-top: 42px;
 }
 
 .header-nav a {
@@ -126,6 +126,15 @@ body {
 .nav-dot {
   color: var(--text-tertiary);
   user-select: none;
+}
+
+.header-nav a.nav-current {
+  color: var(--text-primary);
+}
+
+/* ─── Single-Column Page Body ────────────────────────────────────────────── */
+.page-body {
+  padding: 64px 8px 48px;
 }
 
 /* ─── Two-Column Layout ──────────────────────────────────────────────────── */

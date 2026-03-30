@@ -3,21 +3,23 @@ const path = require('path');
 const { JSDOM } = require('jsdom');
 
 const ROOT = path.join(__dirname, '..');
-const htmlSource = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-const cssSource  = fs.readFileSync(path.join(ROOT, 'styles.css'), 'utf8');
-const jsSource   = fs.readFileSync(path.join(ROOT, 'script.js'), 'utf8');
+const portfolioHtml = fs.readFileSync(path.join(ROOT, 'portfolio.html'), 'utf8');
+const indexHtml     = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+const contactHtml   = fs.readFileSync(path.join(ROOT, 'connect.html'), 'utf8');
+const cssSource     = fs.readFileSync(path.join(ROOT, 'styles.css'), 'utf8');
+const jsSource      = fs.readFileSync(path.join(ROOT, 'script.js'), 'utf8');
 
-function setup() {
-  const dom = new JSDOM(htmlSource, { runScripts: 'outside-only' });
+function setupPortfolio() {
+  const dom = new JSDOM(portfolioHtml, { runScripts: 'outside-only' });
   dom.window.eval(jsSource);
   return { doc: dom.window.document, win: dom.window };
 }
 
-// ─── HTML Structure ───────────────────────────────────────────────────────────
+// ─── Portfolio HTML Structure ──────────────────────────────────────────────────
 
-describe('HTML structure', () => {
+describe('Portfolio HTML structure', () => {
   let doc;
-  beforeAll(() => ({ doc } = setup()));
+  beforeAll(() => ({ doc } = setupPortfolio()));
 
   test('has 13 project rows', () => {
     expect(doc.querySelectorAll('.project-row').length).toBe(13);
@@ -63,9 +65,27 @@ describe('HTML structure', () => {
   test('avatar image exists', () => {
     expect(doc.querySelector('.avatar')).not.toBeNull();
   });
+});
+
+// ─── About Page ───────────────────────────────────────────────────────────────
+
+describe('About page (index.html)', () => {
+  let doc;
+  beforeAll(() => {
+    doc = new JSDOM(indexHtml).window.document;
+  });
 
   test('about section exists', () => {
     expect(doc.querySelector('#about')).not.toBeNull();
+  });
+});
+
+// ─── Contact Page ─────────────────────────────────────────────────────────────
+
+describe('Connect page (connect.html)', () => {
+  let doc;
+  beforeAll(() => {
+    doc = new JSDOM(contactHtml).window.document;
   });
 
   test('connect section has 5 social links', () => {
@@ -73,7 +93,7 @@ describe('HTML structure', () => {
   });
 });
 
-// ─── CSS ─────────────────────────────────────────────────────────────────────
+// ─── CSS ──────────────────────────────────────────────────────────────────────
 
 describe('CSS', () => {
   test('no dark overlay filter on preview images', () => {
@@ -85,7 +105,7 @@ describe('CSS', () => {
 
 describe('JS behaviour', () => {
   let doc, win;
-  beforeEach(() => ({ doc, win } = setup()));
+  beforeEach(() => ({ doc, win } = setupPortfolio()));
 
   test('project 0 is active by default', () => {
     expect(doc.querySelector('.project-row[data-index="0"]').classList.contains('row-active')).toBe(true);
