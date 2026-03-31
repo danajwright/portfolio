@@ -428,6 +428,10 @@ body {
 }
 
 /* ─── Index Two-Column Layout ────────────────────────────────────────────── */
+.two-col--index {
+  grid-template-columns: 1fr 1fr;
+}
+
 .index-layout {
   padding: 64px 0 48px;
   flex: 1;
