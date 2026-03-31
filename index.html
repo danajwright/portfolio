@@ -9,7 +9,7 @@
 <body>
   <div class="container">
 
-    <div class="page-body">
+    <div class="index-layout">
 
       <header class="site-header">
         <div class="avatar-wrap">
@@ -24,26 +24,45 @@
         </nav>
       </header>
 
-      <section id="about" class="about-section">
-        <p class="about-text">I’m a self-taught programmer and product designer with ten years of professional experience.
-          After graduating from <a href="https://www.gwu.edu/" target="_blank" rel="noopener">college,</a> I had a <a href="https://medium.com/@danajwright" target="_blank" rel="noopener">writing job</a> for a few years before I pivoted to programming.
-        </p>
-        <p class="about-text">I did a <a href="https://generalassemb.ly/education/web-development-immersive" target="_blank" rel="noopener">coding bootcamp</a> where I learned to build web apps from scratch. That background has been coming in very handy lately, as I’ve started using Claude Code and Cursor to build and deploy my own designs.
-        </p>
-        <p class="about-text">I like working at the intersection of <a href="https://derive.xyz" target="_blank" rel="noopener">high-stakes financial products</a> and polished consumer interfaces. I prefer fast-moving, founder-led environments where designers are expected ship quickly and own outcomes.
-        </p>
-        <p class="about-text">I believe in ideas over opinions, prototypes as the most valuable tool for collaboration, and exploring dozens of options to find the right one.
-        </p>
-        <p class="about-text">The products I design have a polished aesthetic and have been used by millions of people globally.
-        </p>
-      </section>
+      <div class="two-col two-col--index">
 
-    </div>
+        <div class="col-left">
+          <section id="about" class="about-section">
+            <p class="about-text">I’m a self-taught programmer and product designer with ten years of professional experience.
+              After graduating from <a href="https://www.gwu.edu/" target="_blank" rel="noopener">college,</a> I had a <a href="https://medium.com/@danajwright" target="_blank" rel="noopener">writing job</a> for a few years before I pivoted to programming.
+            </p>
+            <p class="about-text">I did a <a href="https://generalassemb.ly/education/web-development-immersive" target="_blank" rel="noopener">coding bootcamp</a> where I learned to build web apps from scratch. That background has been coming in very handy lately, as I’ve started using Claude Code and Cursor to build and deploy my own designs.
+            </p>
+            <p class="about-text">I like working at the intersection of <a href="https://derive.xyz" target="_blank" rel="noopener">high-stakes financial products</a> and polished consumer interfaces. I prefer fast-moving, founder-led environments where designers are expected ship quickly and own outcomes.
+            </p>
+            <p class="about-text">I believe in ideas over opinions, prototypes as the most valuable tool for collaboration, and exploring dozens of options to find the right one.
+            </p>
+            <p class="about-text">The products I design have a polished aesthetic and have been used by millions of people globally.
+            </p>
+          </section>
+        </div><!-- /col-left -->
+
+        <div class="col-right col-right--top">
+          <section id="chat" class="chat-section">
+            <div id="chat-wrap" hidden>
+              <div class="chat-messages" id="chat-messages"></div>
+              <form id="chat-form" class="chat-form">
+                <input type="text" id="chat-input" class="chat-input" placeholder="Ask me a question…" autocomplete="off">
+                <button type="submit" class="chat-send">↑</button>
+              </form>
+            </div>
+          </section>
+        </div><!-- /col-right -->
+
+      </div><!-- /two-col -->
+
+    </div><!-- /index-layout -->
 
     <footer class="site-footer">
       <p>© 2026 Dana J. Wright</p>
     </footer>
 
   </div><!-- /container -->
+  <script src="chat.js"></script>
 </body>
 </html>
