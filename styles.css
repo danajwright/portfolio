@@ -633,3 +633,35 @@ body {
 .chat-send:hover {
   color: var(--text-secondary);
 }
+
+.chat-sources {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  opacity: 0;
+  animation: about-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.chat-sources__favicons {
+  display: flex;
+  align-items: center;
+}
+
+.chat-sources__favicon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-left: -4px;
+  object-fit: cover;
+  background: #eeeff2;
+}
+
+.chat-sources__favicons .chat-sources__favicon:first-child {
+  margin-left: 0;
+}
+
+.chat-sources__label {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
