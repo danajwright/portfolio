@@ -82,12 +82,12 @@ body {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   flex-shrink: 0;
 }
 
 .avatar-wrap {
-  margin-bottom: 28px;
+  margin-bottom: 21px;
 }
 
 .avatar {
@@ -118,7 +118,7 @@ body {
   font-size: 15px;
   font-weight: 400;
   color: #a1a1aa;
-  margin-top: 42px;
+  margin-top: 24px;
 }
 
 .header-nav a,
@@ -160,7 +160,7 @@ body {
 }
 
 .page-body {
-  padding: 64px 0 48px;
+  padding: 54px 0 48px;
   flex: 1;
 }
 
@@ -172,7 +172,7 @@ body {
 }
 
 .col-left {
-  padding: 64px 0 48px;
+  padding: 54px 0 48px;
   min-width: 0;
 }
 
@@ -433,7 +433,7 @@ body {
 }
 
 .index-layout {
-  padding: 64px 0 48px;
+  padding: 54px 0 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -550,7 +550,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: 360px;
+  max-height: 500px;
   overflow-y: auto;
   margin-bottom: 16px;
   scrollbar-width: none;
@@ -574,6 +574,14 @@ body {
 
 .chat-msg--assistant {
   color: var(--text-secondary);
+}
+
+.chat-msg--assistant p {
+  margin: 0 0 10px;
+}
+
+.chat-msg--assistant p:last-child {
+  margin-bottom: 0;
 }
 
 .chat-msg--error {
@@ -623,15 +631,18 @@ body {
   border: none;
   background: none;
   cursor: pointer;
-  font-size: 16px;
-  color: var(--text-tertiary);
   padding: 0;
   line-height: 1;
-  transition: color 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
-.chat-send:hover {
-  color: var(--text-secondary);
+.chat-send img {
+  display: block;
+  opacity: 0.35;
+}
+
+.chat-send:hover img {
+  opacity: 0.6;
 }
 
 .chat-sources {
@@ -664,4 +675,51 @@ body {
 .chat-sources__label {
   font-size: 12px;
   color: var(--text-tertiary);
+}
+
+.chat-suggestions {
+  padding: 10px 0 8px;
+  margin-top: 60px;
+}
+
+.chat-suggestions__label {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin: 0 0 15px;
+}
+
+.chat-suggestions__pills {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-suggestion-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1.5px solid #eeeff2;
+  border-radius: 10px;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: left;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.chat-suggestion-pill:hover {
+  border-color: #ced0d4;
+  color: var(--text-primary);
+}
+
+.chat-suggestion-pill__arrow {
+  display: inline-block;
+  flex-shrink: 0;
+  font-size: 16px;
+  color: var(--text-tertiary);
+  line-height: 1;
 }

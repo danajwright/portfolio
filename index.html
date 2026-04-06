@@ -48,8 +48,12 @@
               <div class="chat-messages" id="chat-messages"></div>
               <form id="chat-form" class="chat-form">
                 <input type="text" id="chat-input" class="chat-input" placeholder="Ask me anything…" autocomplete="off">
-                <button type="submit" class="chat-send">↑</button>
+                <button type="submit" class="chat-send"><img src="images/↑.svg" alt="Send" width="8" height="16"></button>
               </form>
+              <div id="chat-suggestions" class="chat-suggestions" hidden>
+                <p class="chat-suggestions__label">For example...</p>
+                <div id="chat-suggestions-pills" class="chat-suggestions__pills"></div>
+              </div>
             </div>
           </section>
         </div><!-- /col-right -->

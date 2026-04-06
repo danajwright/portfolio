@@ -1148,15 +1148,40 @@ Here are the three things I think Trump has to do on day one to signal to the co
 
   const history = [];
 
-  const chatWrap     = document.getElementById('chat-wrap');
-  const chatMessages = document.getElementById('chat-messages');
-  const chatForm     = document.getElementById('chat-form');
-  const chatInput    = document.getElementById('chat-input');
+  const chatWrap        = document.getElementById('chat-wrap');
+  const chatMessages    = document.getElementById('chat-messages');
+  const chatForm        = document.getElementById('chat-form');
+  const chatInput       = document.getElementById('chat-input');
+  const chatSuggestions = document.getElementById('chat-suggestions');
+  const suggestionPills = document.getElementById('chat-suggestions-pills');
+
+  const SUGGESTIONS = [
+    "What's the toughest design challenge you've faced?",
+    'What did you work on at BitPay?',
+    'Why does the UX in crypto suck so bad?'
+  ];
 
   function init() {
     chatWrap.hidden = false;
     const el = appendMessage('assistant', '');
+    el.style.color = 'var(--text-primary)';
+    el.style.fontWeight = '600';
+    el.style.fontSize = '13px';
     el.innerHTML = 'Chat with Dana, powered by <a href="https://venice.ai/" target="_blank" rel="noopener">venice.ai</a>';
+
+    SUGGESTIONS.forEach(function (q) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'chat-suggestion-pill';
+      btn.innerHTML = '<img src="images/↑.svg" alt="" style="display:inline-block;transform:rotate(90deg);width:8px;height:16px;flex-shrink:0;opacity:0.35;margin:0 8px" aria-hidden="true">' + q;
+      btn.addEventListener('click', function () {
+        chatInput.value = q;
+        chatSuggestions.hidden = true;
+        chatForm.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+      });
+      suggestionPills.appendChild(btn);
+    });
+    chatSuggestions.hidden = false;
   }
 
   chatForm.addEventListener('submit', async function (e) {
@@ -1164,6 +1189,7 @@ Here are the three things I think Trump has to do on day one to signal to the co
     const text = chatInput.value.trim();
     if (!text) return;
 
+    chatSuggestions.hidden = true;
     chatInput.value = '';
     chatInput.disabled = true;
 
@@ -1214,14 +1240,27 @@ Here are the three things I think Trump has to do on day one to signal to the co
 
   function typeText(el, text, onDone) {
     let i = 0;
-    el.textContent = '';
+    el.innerHTML = '';
+
+    function updateDisplay(typed) {
+      var paras = typed.split(/\n+/);
+      if (paras[paras.length - 1] === '') paras.pop();
+      if (paras.length === 0) paras = [''];
+      while (el.children.length < paras.length) el.appendChild(document.createElement('p'));
+      while (el.children.length > paras.length) el.removeChild(el.lastChild);
+      for (var j = 0; j < paras.length; j++) {
+        if (el.children[j].textContent !== paras[j]) el.children[j].textContent = paras[j];
+      }
+    }
+
     (function next() {
       if (i < text.length) {
-        el.textContent += text[i++];
+        updateDisplay(text.slice(0, ++i));
         chatMessages.scrollTop = chatMessages.scrollHeight;
-        setTimeout(next, 10);
-      } else if (onDone) {
-        onDone();
+        setTimeout(next, Math.random() * 30 + 8);
+      } else {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        if (onDone) onDone();
       }
     })();
   }
