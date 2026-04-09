@@ -1161,6 +1161,21 @@ Here are the three things I think Trump has to do on day one to signal to the co
     'Why does the UX in crypto suck so bad?'
   ];
 
+  const PINNED_RESPONSES = {
+    "What's the toughest design challenge you've faced?": {
+      reply: "I\u2019ve faced some tough design challenges throughout my career, but one that stands out was when I was working on the Derive.xyz trading platform. The challenge was to redesign the core trading platform to make it more customizable, so that traders could configure the dashboard to suit their particular trading strategy.\n\nThrough extensive user research and interviews, we found that most of our users were happy with the design and UX overall, however many noted that the dashboard lacked the flexibility to optimize for specific strategies. We learned that a trader who was selling covered calls to earn premiums for example, wanted to see very specific things, like multiple options chains with different columns. While another trader might be trying to execute a far more sophisticated strategy like an iron condor, and they wanted to see very different things on their dashboard.\n\nTo address the needs and pain points of different users doing different kinds of strategies, we decided to rethink the entire platform as a system of widgets that users could add, drag around on the screen, and configure however they like. I worked closely with the development team to ensure that the design was feasible and that it was within the frontend team\u2019s technical capabilities to execute well.\n\nThe toughest part of this challenge was balancing the need for customization with accessibility and the needs of less experienced traders. We had to find a way to provide advanced features in an intuitive and organized way, while also offering a simple entry point for new users just getting started with options.\n\nThe solution we came up with was a modular design that allowed users to customize their experience based on their needs and preferences. We also introduced a number of default templates, so less experienced users could get started with a pre-configured dashboard that works well for a number of basic strategies.\n\nThe approach worked extremely well. Since the redesign, Derive.xyz went from doing $200m in options volume per week to $800m. Or about 90% of all on-chain options volume. It\u2019s a shining example of how design can have a real impact on the overall success of a product.",
+      sourceIndices: [1]
+    },
+    'What did you work on at BitPay?': {
+      reply: "At BitPay, I worked primarily on the redesign of the BitPay Wallet App. The app hadn\u2019t been updated in five years and was lacking a lot of features that had become table stakes for crypto wallets. For example, adding new networks, swapping assets in-app, and education around seed phrase creation. I focused on three main objectives: multiple wallet management, multi-network asset visualization, and user education.\n\nOne of the key challenges was reconciling Bitcoin\u2019s UTXO model with Ethereum\u2019s account-based model in a single interface. To overcome this, I introduced new terminology, such as replacing \u201ckeys\u201d with \u201cwallets\u201d and \u201cwallets\u201d with \u201cassets,\u201d and I established parent-child relationships between the wallets and assets.\n\nI conducted card-sort testing with BitPay users and general crypto holders, which helped inform decisions around what to show on the wallet cards and detail pages, and the information hierarchy.\n\nThe new app included a new home screen card pattern, a DEX for token swaps, a much more comprehensive wallet detail screen, and a multi-step onboarding process that covered wallet creation, asset selection, and education around seed phrase backup.\n\nThe redesign brought the BitPay app up to speed with current crypto wallet conventions and provided a more feature-complete experience on par with the most popular wallet apps.",
+      sourceIndices: [5]
+    },
+    'Why does the UX in crypto suck so bad?': {
+      reply: "The UX in crypto can be frustrating, to say the least. There are a number of reasons for that which I\u2019ve observed first-hand.\n\nOne is, the technology is genuinely hard. Private keys, gas fees, network-specific addresses, smart contracts, nonces\u2026 I once saw a screen asking if I wanted to use the \u201cplasma exit mechanism\u201d for my transaction. This is complex technology with fundamentally unique concepts, and the more transparent a product is about what\u2019s happening under the hood, the more difficult it is for outsiders to understand.\n\nAnother is, crypto is a culture of hyper-intelligent, borderline autistic DIYers who pride themselves on self-reliance. So a lot of projects (at least in the early days) didn\u2019t even try to appeal to outsiders. I\u2019m thinking of the original Curve DAO UI.\n\nAnother reason is that the space moves at an incredibly fast pace and developers often prioritize functionality over user experience. I\u2019ve worked on plenty of features where the goal is to build an MVP and ship quickly, rather than taking the time to refine the UX.\n\nLast but not least, the regulatory environment is still evolving and teams often run into legal issues when they try to improve user experience. For example, AML/KYC requires detailed user verification, IDs, facial recognition, and data collection, creating high-friction onboarding. Because of different laws in different geographies, platforms have to restrict access based on location, leading to limited or completely blocked user experiences by region. Many DeFi primitives and non-custodial structures are not adequately accounted for by existing laws, which forces every team to make individual choices about how close they want to fly to the sun.\n\nThat being said, people do recognize the importance of UX in crypto and many companies prioritize user experience and design. As a product designer in the space, I\u2019ve had my share of frustrations with crypto UX, but I believe that despite the challenges we can and must find ways to make crypto more accessible and easy to use for everyone.",
+      sourceIndices: [36, 50]
+    }
+  };
+
   function init() {
     chatWrap.hidden = false;
     const el = appendMessage('assistant', '');
@@ -1198,6 +1213,19 @@ Here are the three things I think Trump has to do on day one to signal to the co
 
     const loadingEl = appendMessage('assistant', '');
     loadingEl.innerHTML = '<span class="chat-loading"><span></span><span></span><span></span></span>';
+
+    const pinned = PINNED_RESPONSES[text];
+    if (pinned) {
+      const pinnedSources = pinned.sourceIndices.map(function (i) { return SOURCES[i]; }).filter(Boolean);
+      history.push({ role: 'assistant', content: pinned.reply });
+      setTimeout(function () {
+        typeText(loadingEl, pinned.reply, function () { if (pinnedSources.length) appendSources(loadingEl, pinnedSources); });
+        chatInput.disabled = false;
+        chatInput.focus();
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 3000);
+      return;
+    }
 
     try {
       const res = await fetch(VENICE_API_URL, {
