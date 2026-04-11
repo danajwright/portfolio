@@ -398,6 +398,10 @@ body {
   color: var(--text-tertiary);
 }
 
+.nav-chat-link {
+  display: none;
+}
+
 /* ─── Mobile ─────────────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
   .container {
@@ -413,7 +417,7 @@ body {
     position: static;
     height: auto;
     overflow-y: visible;
-    padding-top: 40px;
+    padding-top: 54px;
     padding-bottom: 40px;
   }
 
@@ -722,4 +726,28 @@ body {
   font-size: 16px;
   color: var(--text-tertiary);
   line-height: 1;
+}
+
+/* ─── Mobile Chat Tab (≤480px) ───────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .nav-chat-link {
+    display: inline;
+  }
+
+  .two-col--index {
+    grid-template-columns: 1fr;
+  }
+
+  .two-col--index .col-right {
+    display: none;
+  }
+
+  .index-layout.chat-tab .col-left {
+    display: none;
+  }
+
+  .index-layout.chat-tab .col-right {
+    display: flex;
+    padding-bottom: 40px;
+  }
 }

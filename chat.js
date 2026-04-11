@@ -1285,7 +1285,7 @@ Here are the three things I think Trump has to do on day one to signal to the co
       if (i < text.length) {
         updateDisplay(text.slice(0, ++i));
         chatMessages.scrollTop = chatMessages.scrollHeight;
-        setTimeout(next, Math.random() * 70 + 5);
+        setTimeout(next, Math.random() * 50 + 5);
       } else {
         chatMessages.scrollTop = chatMessages.scrollHeight;
         if (onDone) onDone();
@@ -1334,4 +1334,40 @@ Here are the three things I think Trump has to do on day one to signal to the co
   }
 
   init();
+}());
+
+// ─── Mobile Chat Tab ────────────────────────────────────────────────────────
+(function () {
+  var navChatLink = document.getElementById('nav-chat-link');
+  var navAboutLink = document.getElementById('nav-about-link');
+  var indexLayout = document.querySelector('.index-layout');
+  if (!navChatLink || !navAboutLink || !indexLayout) return;
+
+  function activateChatTab() {
+    indexLayout.classList.add('chat-tab');
+    navChatLink.classList.add('nav-current');
+    navAboutLink.classList.remove('nav-current');
+  }
+
+  function activateAboutTab() {
+    indexLayout.classList.remove('chat-tab');
+    navAboutLink.classList.add('nav-current');
+    navChatLink.classList.remove('nav-current');
+  }
+
+  navChatLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    activateChatTab();
+  });
+
+  navAboutLink.addEventListener('click', function (e) {
+    if (indexLayout.classList.contains('chat-tab')) {
+      e.preventDefault();
+      activateAboutTab();
+    }
+  });
+
+  if (window.location.search === '?chat') {
+    activateChatTab();
+  }
 }());
