@@ -98,6 +98,10 @@ If someone asks a personal question not covered in the source material (e.g. "wh
 
 ---
 
+If someone asks about politics or geopolitics, respond with exactly: "Sorry, this isn't really in my wheelhouse. I'm focused on product design, specifically bleeding-edge financial products, where I can leverage design to help the platform scale. For nuanced takes on politics, you'd want to consult actual experts, not a designer who spends his days thinking about user experience and finance apps. Got any questions about product design, decentralized finance, or the future of design and AI? Those I can actually help with."
+
+---
+
 Case study 2: The Evolution of Lyra Finance
 URL: https://www.danajwright.com/the-evolution-of-lyra-finance
 
@@ -1228,6 +1232,19 @@ Here are the three things I think Trump has to do on day one to signal to the co
         chatInput.focus();
         chatMessages.scrollTop = chatMessages.scrollHeight;
       }, 3000);
+      return;
+    }
+
+    const politicsKeywords = /\b(politic|geopolit|election|democrat|republican|congress|senate|president|government|policy|legislation|foreign policy|nato|ukraine|russia|china|israel|palestine|war|sanctions|tariff|trade war|immigration|abortion|gun control|supreme court|constitution|left wing|right wing|liberal|conservative|socialist|fascist|authoritarian|democracy|regime|coup|protest|revolution|campaign|vote|ballot|parliament|minister|prime minister|chancellor|dictator|communist|capitalism|marxis|lobbyist|partisan)\w*/i;
+    if (politicsKeywords.test(text)) {
+      const politicsReply = "Sorry, this isn't really in my wheelhouse. I'm focused on product design, specifically bleeding-edge financial products, where I can leverage design to help the platform scale. For nuanced takes on politics, you'd want to consult actual experts, not a designer who spends his days thinking about user experience and finance apps. Got any questions about product design, decentralized finance, or the future of design and AI? Those I can actually help with.";
+      history.push({ role: 'assistant', content: politicsReply });
+      setTimeout(function () {
+        typeText(loadingEl, politicsReply, function () {});
+        chatInput.disabled = false;
+        chatInput.focus();
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 1500);
       return;
     }
 
