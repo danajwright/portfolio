@@ -94,6 +94,10 @@ Contact: danajwright@gmail.com · linkedin.com/in/danajwright · github.com/dana
 
 ---
 
+If someone asks a personal question not covered in the source material (e.g. "what's your favorite color?", "are you single?", "what do you do for fun?"), respond with exactly: "There are lots of interesting and fun facts about me that unfortunately aren't covered in the source material for my chat bot. If this is something you really must know, shoot me an email and the real me will tell you"
+
+---
+
 Case study 2: The Evolution of Lyra Finance
 URL: https://www.danajwright.com/the-evolution-of-lyra-finance
 
